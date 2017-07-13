@@ -52,6 +52,7 @@ public abstract class Game {
         userMap.put(Move.X, player1);
         userMap.put(Move.O, player2);
 
+        broadCastToPlayers(board.display());
         Move mover = Move.O;
         outer:
         while (true) {
