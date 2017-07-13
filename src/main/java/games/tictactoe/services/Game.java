@@ -75,6 +75,7 @@ public abstract class Game {
                     if (checkWinner || board.isGameOver()) {
                         break outer;
                     }
+                    break;
                 } catch (InvalidMoveException e) {
                     broadCastToPlayers(String.format("Message for %s|%s", player.getUserName(), e.getMessage()));
                 }
