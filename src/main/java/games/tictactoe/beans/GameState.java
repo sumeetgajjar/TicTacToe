@@ -7,5 +7,6 @@ package games.tictactoe.beans;
 public enum GameState {
     INITIALIZING,
     RUNNING,
-    FINISHED
+    FINISHED,
+    ERROR
 }

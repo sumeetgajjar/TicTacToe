@@ -1,5 +1,6 @@
 package games.tictactoe.services;
 
+import games.tictactoe.beans.GameState;
 import games.tictactoe.beans.Player;
 
 import java.io.IOException;
@@ -25,7 +26,10 @@ public class Match extends Game implements Runnable {
         try {
             play();
         } catch (IOException e) {
+            gameStats.setGameState(GameState.ERROR);
             e.printStackTrace();
+        } finally {
+            Arena.addGameStats(gameStats);
         }
     }
 }
