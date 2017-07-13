@@ -1,11 +1,8 @@
 package games.tictactoe;
 
-import games.tictactoe.beans.Board;
 import games.tictactoe.beans.Move;
 
-import java.util.EnumMap;
-import java.util.Map;
-import java.util.Scanner;
+import java.io.IOException;
 
 /**
  * Created by sumeet
@@ -13,43 +10,11 @@ import java.util.Scanner;
  */
 public class SingleMachineTicTacToe {
 
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter Board Dimension");
-        int boardSize = scanner.nextInt();
+    public static void main(String[] args) throws IOException {
+        Player player1 = new Player(System.in, Move.X, System.out);
+        Player player2 = new Player(System.in, Move.O, System.out);
+        GameManager gameManager = new GameManager(3, player1, player2);
+        gameManager.play();
 
-        Board board = new Board(boardSize);
-        System.out.println("Enter 1st UserName :");
-        String userName = scanner.next();
-
-        System.out.println("Enter 2nd UserName :");
-        String userName2 = scanner.next();
-
-        Map<Move, String> userMap = new EnumMap<>(Move.class);
-        userMap.put(Move.X, userName);
-        userMap.put(Move.O, userName2);
-
-        Move mover = Move.O;
-        outer:
-        while (true) {
-            mover = Move.getOtherMove(mover);
-            boolean makeMove = false;
-            while (!makeMove) {
-                System.out.println(String.format("Its %s's turn : ", userMap.get(mover)));
-                int nextMove = scanner.nextInt();
-                makeMove = board.makeMove(nextMove, mover);
-                if (makeMove) {
-                    boolean checkWinner = board.checkWinner(mover);
-                    if (checkWinner) {
-                        System.out.printf("Winner is %s%n", userMap.get(mover));
-                    } else if (board.isGameOver()) {
-                        System.out.println("Game Over");
-                    }
-                    board.display();
-
-                    if (checkWinner || board.isGameOver()) break outer;
-                }
-            }
-        }
     }
 }
