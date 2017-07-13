@@ -49,15 +49,15 @@ public class Board {
         return index > 0 && index <= totalMovesPossible && !Util.isSet(board[i][j]);
     }
 
-    public boolean makeMove(int index, Move move) {
+    public void makeMove(int index, Move move) throws InvalidMoveException {
         if (isValidMove(index)) {
             int i = getI(index);
             int j = getJ(index);
             board[i][j] = move;
             currentMoveCounter++;
-            return true;
+        } else {
+            throw new InvalidMoveException("Should I dumb down this game for u ??");
         }
-        return false;
     }
 
     private boolean checkRow(Move move) {

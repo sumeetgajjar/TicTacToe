@@ -1,6 +1,7 @@
 package games.tictactoe.services;
 
 import games.tictactoe.beans.Board;
+import games.tictactoe.beans.InvalidMoveException;
 import games.tictactoe.beans.Move;
 import games.tictactoe.beans.Player;
 
@@ -57,13 +58,12 @@ public abstract class Game {
         outer:
         while (true) {
             mover = Move.getOtherMove(mover);
-            boolean makeMove = false;
-            while (!makeMove) {
+            while (true) {
                 Player player = userMap.get(mover);
                 broadCastToPlayers(String.format("Its %s's turn to play %s: ", player.getUserName(), player.getMove().name()));
                 int nextMove = Integer.parseInt(player.readLine());
-                makeMove = board.makeMove(nextMove, mover);
-                if (makeMove) {
+                try {
+                    board.makeMove(nextMove, mover);
                     boolean checkWinner = board.checkWinner(mover);
                     if (checkWinner) {
                         broadCastToPlayers(String.format("Winner is %s%n", player.getUserName()));
@@ -72,7 +72,11 @@ public abstract class Game {
                     }
                     broadCastToPlayers(board.display());
 
-                    if (checkWinner || board.isGameOver()) break outer;
+                    if (checkWinner || board.isGameOver()) {
+                        break outer;
+                    }
+                } catch (InvalidMoveException e) {
+                    broadCastToPlayers(String.format("Message for %s|%s", player.getUserName(), e.getMessage()));
                 }
             }
         }
