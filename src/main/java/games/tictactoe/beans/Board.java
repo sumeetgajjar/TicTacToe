@@ -24,6 +24,7 @@ public class Board {
                 board[i][j] = null;
             }
         }
+        display();
     }
 
     public boolean isGameOver() {
@@ -45,7 +46,7 @@ public class Board {
     private boolean isValidMove(int index) {
         int i = getI(index);
         int j = getJ(index);
-        return index > 0 && index <= totalMovesPossible && Util.isSet(board[i][j]);
+        return index > 0 && index <= totalMovesPossible && !Util.isSet(board[i][j]);
     }
 
     public boolean makeMove(int index, Move move) {
@@ -115,9 +116,9 @@ public class Board {
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
                 if (board[i][j] == Move.X) {
-                    builder.append("X   ");
+                    builder.append(" X ");
                 } else if (board[i][j] == Move.O) {
-                    builder.append("O   ");
+                    builder.append(" O ");
                 } else {
                     builder.append(String.format("%03d", index));
                 }
@@ -126,6 +127,9 @@ public class Board {
             }
             builder.append("\r\n");
         }
-        return builder.toString();
+        builder.append("\r\n");
+        String string = builder.toString();
+        System.out.println(string);
+        return string;
     }
 }
