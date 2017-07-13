@@ -11,11 +11,11 @@ import java.util.Map;
  * Created by sumeet
  * on 13/7/17.
  */
-public class GameManager {
+public abstract class GameManager {
 
     private final int n;
-    private final Player player1;
-    private final Player player2;
+    protected final Player player1;
+    protected final Player player2;
     private final Board board;
 
     public GameManager(int n, Player player1, Player player2) {
@@ -25,7 +25,7 @@ public class GameManager {
         this.board = new Board(n);
     }
 
-    private void broadCastToPlayers(String message) throws IOException {
+    protected void broadCastToPlayers(String message) throws IOException {
         player1.writeLine(message);
         player2.writeLine(message);
     }
