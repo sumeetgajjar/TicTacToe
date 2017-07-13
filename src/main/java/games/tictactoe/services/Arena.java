@@ -68,9 +68,9 @@ public class Arena {
             @Override
             public void run() {
                 try {
-                    ServerSocket statusServerSocker = new ServerSocket(STATUS_PORT);
+                    ServerSocket statusServerSocket = new ServerSocket(STATUS_PORT);
                     while (true) {
-                        try (Socket socket = statusServerSocker.accept()) {
+                        try (Socket socket = statusServerSocket.accept()) {
                             try (BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()))) {
                                 bw.write(GSON.toJson(GAME_STATS, List.class));
                                 bw.newLine();
