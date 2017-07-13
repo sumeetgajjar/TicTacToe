@@ -108,7 +108,7 @@ public class Board {
 
     private boolean checkDiagonal2(Move move) {
         int sum = 0;
-        for (int i=0,j = n - 1; j >= 0; j--,i++) {
+        for (int i = 0, j = n - 1; j >= 0; j--, i++) {
             if (board[i][j] != move) {
                 break;
             }
@@ -144,7 +144,6 @@ public class Board {
         }
         builder.append("\r\n");
         String string = builder.toString();
-        System.out.println(string);
         return string;
     }
 }
