@@ -54,6 +54,7 @@ public class Board {
             int i = getI(index);
             int j = getJ(index);
             board[i][j] = move;
+            currentMoveCounter++;
             return true;
         }
         return false;
@@ -107,6 +108,8 @@ public class Board {
 
 
     public boolean checkWinner(Move move) {
+        System.out.println(move.name());
+        display();
         return checkRow(move) || checkColumn(move) || checkDiagonal(move);
     }
 

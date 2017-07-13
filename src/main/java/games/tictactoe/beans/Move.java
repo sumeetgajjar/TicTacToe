@@ -6,5 +6,12 @@ package games.tictactoe.beans;
  */
 public enum Move {
     X,
-    O
+    O;
+
+    public static Move getOtherMove(Move move) {
+        if (move == X) return O;
+        if (move == O) return X;
+
+        return X;
+    }
 }
