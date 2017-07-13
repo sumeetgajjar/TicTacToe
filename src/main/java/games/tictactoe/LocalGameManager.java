@@ -10,8 +10,8 @@ import java.io.IOException;
  */
 public class LocalGameManager extends GameManager {
 
-    public LocalGameManager(int n, Player player1, Player player2) {
-        super(n, player1, player2);
+    public LocalGameManager(int n) {
+        super(n, new Player(System.in, Move.X, System.out), new Player(System.in, Move.O, System.out));
     }
 
     @Override
@@ -20,9 +20,7 @@ public class LocalGameManager extends GameManager {
     }
 
     public static void main(String[] args) throws IOException {
-        Player player1 = new Player(System.in, Move.X, System.out);
-        Player player2 = new Player(System.in, Move.O, System.out);
-        GameManager gameManager = new LocalGameManager(3, player1, player2);
+        GameManager gameManager = new LocalGameManager(3);
         gameManager.play();
 
     }
