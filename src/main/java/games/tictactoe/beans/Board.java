@@ -42,7 +42,7 @@ public class Board {
         return (i * n + j) + 1;
     }
 
-    public boolean isValidMove(int index) {
+    private boolean isValidMove(int index) {
         int i = getI(index);
         int j = getJ(index);
         return index > 0 && index <= totalMovesPossible && Util.isSet(board[i][j]);
