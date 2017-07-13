@@ -135,7 +135,7 @@ public class Board {
                 } else if (board[i][j] == Move.O) {
                     builder.append(" O ");
                 } else {
-                    builder.append(String.format("%03d", index));
+                    builder.append(String.format("% 3d", index));
                 }
                 builder.append("|");
                 index++;
