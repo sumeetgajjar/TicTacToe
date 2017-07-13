@@ -1,6 +1,4 @@
-package games.tictactoe;
-
-import games.tictactoe.beans.Move;
+package games.tictactoe.beans;
 
 import java.io.*;
 

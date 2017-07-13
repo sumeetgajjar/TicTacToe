@@ -1,7 +1,8 @@
-package games.tictactoe;
+package games.tictactoe.services;
 
 import games.tictactoe.beans.Board;
 import games.tictactoe.beans.Move;
+import games.tictactoe.beans.Player;
 
 import java.io.IOException;
 import java.util.EnumMap;
@@ -11,18 +12,23 @@ import java.util.Map;
  * Created by sumeet
  * on 13/7/17.
  */
-public abstract class GameManager {
+public abstract class Game {
 
-    private final int n;
     protected final Player player1;
     protected final Player player2;
-    private final Board board;
+    protected int n;
+    protected Board board;
 
-    public GameManager(int n, Player player1, Player player2) {
-        this.n = n;
+    public Game(Player player1, Player player2) {
         this.player1 = player1;
         this.player2 = player2;
+    }
+
+    private void initBoard() throws IOException {
+        player1.writeLine("Please Enter the Board Size");
+        int n = Integer.parseInt(player1.readLine());
         this.board = new Board(n);
+        broadCastToPlayers(String.format("The size of the board is %d", n));
     }
 
     protected void broadCastToPlayers(String message) throws IOException {
@@ -38,6 +44,7 @@ public abstract class GameManager {
     }
 
     public void play() throws IOException {
+        initBoard();
         initializePlayer(player1, 1);
         initializePlayer(player2, 2);
 
