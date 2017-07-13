@@ -91,7 +91,7 @@ public class Board {
         return false;
     }
 
-    private boolean checkDiagonal(Move move) {
+    private boolean checkDiagonal1(Move move) {
         int sum = 0;
         for (int i = 0; i < n; i++) {
             if (board[i][i] != move) {
@@ -105,9 +105,23 @@ public class Board {
         return false;
     }
 
+    private boolean checkDiagonal2(Move move) {
+        int sum = 0;
+        for (int i = n - 1; i >= 0; i--) {
+            if (board[i][i] != move) {
+                break;
+            }
+            sum++;
+        }
+        if (sum == n) {
+            return true;
+        }
+        return false;
+    }
+
 
     public boolean checkWinner(Move move) {
-        return checkRow(move) || checkColumn(move) || checkDiagonal(move);
+        return checkRow(move) || checkColumn(move) || checkDiagonal1(move) || checkDiagonal2(move);
     }
 
     public String display() {
