@@ -40,7 +40,7 @@ public class SingleMachineTicTacToe {
                 if (makeMove) {
                     boolean checkWinner = board.checkWinner(mover);
                     if (checkWinner) {
-                        System.out.println("Winner is X");
+                        System.out.printf("Winner is %s%n", userMap.get(mover));
                     } else if (board.isGameOver()) {
                         System.out.println("Game Over");
                     }

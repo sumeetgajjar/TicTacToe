@@ -108,8 +108,8 @@ public class Board {
 
     private boolean checkDiagonal2(Move move) {
         int sum = 0;
-        for (int i = n - 1; i >= 0; i--) {
-            if (board[i][i] != move) {
+        for (int i=0,j = n - 1; j >= 0; j--,i++) {
+            if (board[i][j] != move) {
                 break;
             }
             sum++;
@@ -122,7 +122,7 @@ public class Board {
 
 
     public boolean checkWinner(Move move) {
-        return checkRow(move) || checkColumn(move) || checkDiagonal(move);
+        return checkRow(move) || checkColumn(move) || checkDiagonal1(move) || checkDiagonal2(move);
     }
 
     public String display() {
