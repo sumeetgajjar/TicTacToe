@@ -34,21 +34,15 @@ public class Player {
     }
 
     public String readLine() throws IOException {
-        String line = null;
-        try (BufferedReader br = new BufferedReader(new InputStreamReader(inputStream))) {
-            line = br.readLine();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
+        String line = br.readLine();
         return line;
     }
 
     public void writeLine(String message) throws IOException {
-        try (BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(outputStream))) {
-            bw.write(message);
-            bw.newLine();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(outputStream));
+        bw.write(message);
+        bw.newLine();
+        bw.flush();
     }
 }
