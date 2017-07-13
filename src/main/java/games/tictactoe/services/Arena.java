@@ -18,7 +18,9 @@ public class Arena {
     private Move move;
     private final ServerSocket serverSocket;
     private static final int PORT = 9999;
-    private static final ExecutorService EXECUTOR_SERVICE = Executors.newCachedThreadPool();
+    private static final ExecutorService GAME_POOL = Executors.newCachedThreadPool();
+    private static final ExecutorService STATUS_POOL = Executors.newFixedThreadPool(1);
+
 
     public Arena() throws IOException {
         this.serverSocket = new ServerSocket(PORT);
@@ -37,7 +39,7 @@ public class Arena {
             try {
                 Player player1 = getPlayer(serverSocket.accept());
                 Player player2 = getPlayer(serverSocket.accept());
-                EXECUTOR_SERVICE.submit(new Match(player1, player2));
+                GAME_POOL.submit(new Match(player1, player2));
 
             } catch (Exception e) {
                 e.printStackTrace();
