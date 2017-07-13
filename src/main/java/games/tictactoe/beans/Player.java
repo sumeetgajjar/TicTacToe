@@ -13,9 +13,9 @@ public class Player {
     private final OutputStream outputStream;
     private String userName;
 
-    public Player(InputStream inputStream, Move move, OutputStream outputStream) {
-        this.inputStream = inputStream;
+    public Player(Move move, InputStream inputStream, OutputStream outputStream) {
         this.move = move;
+        this.inputStream = inputStream;
         this.outputStream = outputStream;
     }
 

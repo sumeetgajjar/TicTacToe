@@ -12,7 +12,7 @@ import java.io.IOException;
 public class LocalGame extends Game {
 
     public LocalGame() {
-        super(new Player(System.in, Move.X, System.out), new Player(System.in, Move.O, System.out));
+        super(new Player(Move.X, System.in, System.out), new Player(Move.O, System.in, System.out));
     }
 
     @Override

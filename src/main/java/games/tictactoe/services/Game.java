@@ -32,10 +32,7 @@ public abstract class Game {
         broadCastToPlayers(String.format("The size of the board is %d", n));
     }
 
-    protected void broadCastToPlayers(String message) throws IOException {
-        player1.writeLine(message);
-        player2.writeLine(message);
-    }
+    protected abstract void broadCastToPlayers(String message) throws IOException;
 
     private void initializePlayer(Player player, int i) throws IOException {
         broadCastToPlayers(String.format("Initializing Player %d", i));
