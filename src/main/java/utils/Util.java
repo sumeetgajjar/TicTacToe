@@ -6,7 +6,7 @@ package utils;
  */
 public class Util {
 
-    public boolean isSet(Object o) {
+    public static boolean isSet(Object o) {
         return o != null;
     }
 

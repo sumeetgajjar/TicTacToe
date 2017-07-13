@@ -1,5 +1,7 @@
 package games.tictactoe.beans;
 
+import utils.Util;
+
 /**
  * Created by sumeet
  * on 13/7/17.
@@ -43,7 +45,7 @@ public class Board {
     public boolean isValidMove(int index) {
         int i = getI(index);
         int j = getJ(index);
-        return index > 0 && index <= totalMovesPossible && board[i][j] != null;
+        return index > 0 && index <= totalMovesPossible && Util.isSet(board[i][j]);
     }
 
     public boolean makeMove(int index, Move move) {
