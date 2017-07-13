@@ -6,4 +6,7 @@ package games.tictactoe;
  */
 public class SingleMachineTicTacToe {
 
+    public static void main(String[] args) {
+
+    }
 }
