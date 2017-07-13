@@ -25,12 +25,13 @@ public class SingleMachineTicTacToe {
         System.out.println("Enter 2nd UserName :");
         String userName2 = scanner.next();
 
-        Map<Move, String> userMap = new EnumMap<Move, String>(Move.class);
+        Map<Move, String> userMap = new EnumMap<>(Move.class);
         userMap.put(Move.X, userName);
         userMap.put(Move.O, userName2);
 
         Move mover = Move.O;
-        outer: while (true) {
+        outer:
+        while (true) {
             mover = Move.getOtherMove(mover);
             boolean makeMove = false;
             while (!makeMove) {
