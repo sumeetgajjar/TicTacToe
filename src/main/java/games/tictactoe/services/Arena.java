@@ -51,6 +51,7 @@ public class Arena {
                 Socket player1Socket = serverSocket.accept();
                 Player player1 = getPlayer(player1Socket);
                 Util.log("PLAYER_1_CONNECTED");
+                player1.writeLine("WAITING_FOR_PLAYER_2");
 
                 Socket player2Socket = serverSocket.accept();
                 Player player2 = getPlayer(player2Socket);
