@@ -47,6 +47,7 @@ public class GameStatsService {
                 try {
                     while (true) {
                         try (Socket socket = statusServerSocket.accept()) {
+                            Util.log("REQUEST_FOR_GAME_STATS", socket.getInetAddress().getHostAddress());
                             try (BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()))) {
                                 bw.write(GSON.toJson(Arena.getGameStats(), List.class));
                                 bw.newLine();
