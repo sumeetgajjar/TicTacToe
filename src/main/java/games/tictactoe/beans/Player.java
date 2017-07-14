@@ -75,6 +75,9 @@ public class Player {
                     player.writeLine(br.readLine());
                 } else {
                     System.out.println(message);
+                    if (message.contains("winner")) {
+                        break;
+                    }
                 }
             }
         }
