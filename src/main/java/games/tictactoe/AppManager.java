@@ -18,6 +18,7 @@ public class AppManager {
     public static void main(String[] args) throws IOException, InstantiationException, IllegalAccessException {
 
         System.out.println("Enter the Game Type");
+        System.out.println("ARENA or LOCAL ?");
         Scanner sc = new Scanner(System.in);
         GameType gameType = GameType.valueOf(sc.nextLine());
 
