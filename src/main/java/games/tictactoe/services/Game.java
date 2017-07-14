@@ -26,17 +26,21 @@ public abstract class Game {
 
     private void initBoard() throws IOException {
         player1.writeLine("Please Enter the Board Size");
-        int n = Integer.parseInt(player1.readLine());
+        int n = Integer.parseInt(readFromPlayer(player1));
         this.board = new Board(n);
         broadCastToPlayers(String.format("The size of the board is %d", n));
     }
 
     protected abstract void broadCastToPlayers(String message) throws IOException;
 
+    protected String readFromPlayer(Player player) throws IOException {
+        return player.readLine();
+    }
+
     private void initializePlayer(Player player, int i) throws IOException {
         broadCastToPlayers(String.format("Initializing Player %d", i));
         player.writeLine("Enter your Name");
-        String username = player.readLine();
+        String username = readFromPlayer(player);
         player.setUserName(username);
     }
 
@@ -66,7 +70,7 @@ public abstract class Game {
             while (true) {
                 Player player = userMap.get(mover);
                 broadCastToPlayers(String.format("Its %s's turn to play %s: ", player.getUserName(), player.getMove().name()));
-                int nextMove = Integer.parseInt(player.readLine());
+                int nextMove = Integer.parseInt(readFromPlayer(player));
                 try {
                     board.makeMove(nextMove, mover);
                     boolean checkWinner = board.checkWinner(mover);

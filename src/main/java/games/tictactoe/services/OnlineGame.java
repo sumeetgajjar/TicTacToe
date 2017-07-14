@@ -23,8 +23,13 @@ public class OnlineGame extends Game implements Runnable {
 
     @Override
     protected void broadCastToPlayers(String message) throws IOException {
-        player1.writeLine(message);
-        player2.writeLine(message);
+        player1.write(message);
+        player2.write(message);
+    }
+
+    @Override
+    protected String readFromPlayer(Player player) throws IOException {
+        return player.read();
     }
 
     @Override

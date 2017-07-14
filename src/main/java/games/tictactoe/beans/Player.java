@@ -1,6 +1,8 @@
 package games.tictactoe.beans;
 
 import java.io.*;
+import java.net.Socket;
+import java.util.Scanner;
 
 /**
  * Created by sumeet
@@ -31,6 +33,16 @@ public class Player {
         this.userName = userName;
     }
 
+    public String read() throws IOException {
+        writeLine("write");
+        return readLine();
+    }
+
+    public void write(String message) throws IOException {
+        writeLine("read");
+        writeLine(message);
+    }
+
     public String readLine() throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
         String line = br.readLine();
@@ -51,5 +63,21 @@ public class Player {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public static void main(String[] args) throws Exception {
+        Socket socket = new Socket("localhost", 9999);
+        Player player = new Player(Move.X, socket.getInputStream(), socket.getOutputStream());
+
+        while (true) {
+            String command = player.readLine();
+            if (command.equals("read")) {
+                System.out.println(player.readLine());
+            } else {
+                Scanner scanner = new Scanner(System.in);
+                player.writeLine(scanner.nextLine());
+            }
+        }
+
     }
 }
