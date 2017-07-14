@@ -26,6 +26,7 @@ public abstract class Game {
     }
 
     private void initBoard() throws IOException {
+        broadCastToPlayers("INITIALIZING_BOARD");
         writeToPlayer(player1, "Please Enter the Board Size");
         int n = Integer.parseInt(readFromPlayer(player1));
         this.board = new Board(n);
