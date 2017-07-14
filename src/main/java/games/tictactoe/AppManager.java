@@ -23,9 +23,9 @@ public class AppManager {
 
         switch (gameType) {
             case ARENA:
+                GameStatsService.initStatusServer();
                 Arena arena = new Arena();
                 arena.start();
-                GameStatsService.initStatusServer();
                 break;
             case LOCAL:
                 Game game = new LocalGame();
