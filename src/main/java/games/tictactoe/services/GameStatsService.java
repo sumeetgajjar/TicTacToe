@@ -30,7 +30,7 @@ public class GameStatsService {
         if (!Util.isSet(STATUS_SERVER_SOCKET)) {
             synchronized (GameStatsService.class) {
                 if (!Util.isSet(STATUS_SERVER_SOCKET)) {
-                    Util.log("INITIALIZING_GAME_STATS_SOCKET", String.valueOf(STATUS_POOL));
+                    Util.log("INITIALIZING_GAME_STATS_SOCKET", String.valueOf(STATUS_PORT));
                     STATUS_SERVER_SOCKET = new ServerSocket(STATUS_PORT);
                     Util.log("GAME_STATS_SOCKET_INITIALIZED");
                     startListening(STATUS_SERVER_SOCKET);
