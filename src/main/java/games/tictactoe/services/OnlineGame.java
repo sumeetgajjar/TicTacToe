@@ -2,7 +2,6 @@ package games.tictactoe.services;
 
 import games.tictactoe.beans.GameState;
 import games.tictactoe.beans.Player;
-import utils.Util;
 
 import java.io.IOException;
 import java.net.Socket;
@@ -42,7 +41,6 @@ public class OnlineGame extends Game implements Runnable {
     public void run() {
         try {
             Arena.addGameStats(gameStats);
-            Util.log("STARTING_MATCH", player1Socket.getInetAddress().getHostAddress(), player1.getUserName(), player2Socket.getInetAddress().getHostAddress(), player2.getUserName());
             play();
         } catch (IOException e) {
             gameStats.setGameState(GameState.ERROR);

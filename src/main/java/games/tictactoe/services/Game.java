@@ -1,6 +1,7 @@
 package games.tictactoe.services;
 
 import games.tictactoe.beans.*;
+import utils.Util;
 
 import java.io.IOException;
 import java.util.EnumMap;
@@ -65,6 +66,7 @@ public abstract class Game {
         userMap.put(Move.X, player1);
         userMap.put(Move.O, player2);
 
+        Util.log("STARTING_GAME", player1.getUserName(), player2.getUserName());
         gameStats.setGameState(GameState.RUNNING);
         broadCastToPlayers(board.display());
         Move mover = Move.O;
