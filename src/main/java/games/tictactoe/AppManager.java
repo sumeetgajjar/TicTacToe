@@ -6,8 +6,9 @@ import games.tictactoe.services.Game;
 import games.tictactoe.services.GameStatsService;
 import games.tictactoe.services.LocalGame;
 
+import java.io.BufferedReader;
 import java.io.IOException;
-import java.util.Scanner;
+import java.io.InputStreamReader;
 
 /**
  * Created by sumeet
@@ -19,8 +20,8 @@ public class AppManager {
 
         System.out.println("Enter the Game Type");
         System.out.println("ARENA or LOCAL ?");
-        Scanner sc = new Scanner(System.in);
-        GameType gameType = GameType.valueOf(sc.nextLine());
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        GameType gameType = GameType.valueOf(br.readLine());
 
         switch (gameType) {
             case ARENA:
