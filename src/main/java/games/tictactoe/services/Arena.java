@@ -51,6 +51,7 @@ public class Arena {
                 Player player1 = getPlayer(player1Socket);
                 Socket player2Socket = serverSocket.accept();
                 Player player2 = getPlayer(player2Socket);
+                Util.log("SCHEDULING_GAME", player1Socket.getInetAddress().getHostAddress(), String.valueOf(player1Socket.getPort()), player2Socket.getInetAddress().getHostAddress(), String.valueOf(player2Socket.getPort()));
 
                 GAME_POOL.submit(new OnlineGame(player1Socket, player1, player2Socket, player2));
 
