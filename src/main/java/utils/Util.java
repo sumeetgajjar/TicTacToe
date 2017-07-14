@@ -11,7 +11,7 @@ public class Util {
     }
 
     public static void log(String... messages) {
-        StringBuilder builder = new StringBuilder();
+        StringBuilder builder = new StringBuilder("|");
         for (String message : messages) {
             builder.append(message).append("|");
         }
