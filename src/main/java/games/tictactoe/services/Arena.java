@@ -1,14 +1,11 @@
 package games.tictactoe.services;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import games.tictactoe.beans.GameStats;
 import games.tictactoe.beans.Move;
 import games.tictactoe.beans.Player;
+import utils.Util;
 
-import java.io.BufferedWriter;
 import java.io.IOException;
-import java.io.OutputStreamWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -25,14 +22,14 @@ public class Arena {
     private Move move;
     private final ServerSocket serverSocket;
     private static final int PORT = 9999;
-    private static final int STATUS_PORT = 10000;
     private static final List<GameStats> GAME_STATS = new ArrayList<>();
     private static final ExecutorService GAME_POOL = Executors.newCachedThreadPool();
-    private static final ExecutorService STATUS_POOL = Executors.newFixedThreadPool(1);
 
     public Arena() throws IOException {
+        Util.log("INITIALIZING_ARENA", String.valueOf(PORT));
         this.serverSocket = new ServerSocket(PORT);
         this.move = Move.O;
+        Util.log("ARENA_INITIALIZED");
     }
 
     public static synchronized void addGameStats(GameStats gameStats) {
@@ -49,10 +46,12 @@ public class Arena {
 
         while (true) {
             try {
+                Util.log("WAITING_FOR_PLAYERS_TO_CONNECT");
                 Socket player1Socket = serverSocket.accept();
                 Player player1 = getPlayer(player1Socket);
                 Socket player2Socket = serverSocket.accept();
                 Player player2 = getPlayer(player2Socket);
+
                 GAME_POOL.submit(new OnlineGame(player1Socket, player1, player2Socket, player2));
 
             } catch (Exception e) {
@@ -61,32 +60,7 @@ public class Arena {
         }
     }
 
-    private static final Gson GSON = new GsonBuilder().serializeNulls().setPrettyPrinting().create();
-
-
-    private void initStatusServer() {
-        STATUS_POOL.submit(new Runnable() {
-
-            @Override
-            public void run() {
-                try {
-                    ServerSocket statusServerSocket = new ServerSocket(STATUS_PORT);
-                    while (true) {
-                        try (Socket socket = statusServerSocket.accept()) {
-                            try (BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()))) {
-                                bw.write(GSON.toJson(GAME_STATS, List.class));
-                                bw.newLine();
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
+    public static List<GameStats> getGameStats() {
+        return GAME_STATS;
     }
 }
