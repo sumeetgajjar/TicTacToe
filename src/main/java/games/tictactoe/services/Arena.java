@@ -46,10 +46,12 @@ public class Arena {
 
         while (true) {
             try {
+                Util.log("WAITING_FOR_PLAYERS_TO_CONNECT");
                 Socket player1Socket = serverSocket.accept();
                 Player player1 = getPlayer(player1Socket);
                 Socket player2Socket = serverSocket.accept();
                 Player player2 = getPlayer(player2Socket);
+
                 GAME_POOL.submit(new OnlineGame(player1Socket, player1, player2Socket, player2));
 
             } catch (Exception e) {
