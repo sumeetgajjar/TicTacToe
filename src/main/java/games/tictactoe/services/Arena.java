@@ -47,10 +47,15 @@ public class Arena {
         while (true) {
             try {
                 Util.log("WAITING_FOR_PLAYERS_TO_CONNECT");
+
                 Socket player1Socket = serverSocket.accept();
                 Player player1 = getPlayer(player1Socket);
+                Util.log("PLAYER_1_CONNECTED");
+
                 Socket player2Socket = serverSocket.accept();
                 Player player2 = getPlayer(player2Socket);
+                Util.log("PLAYER_2_CONNECTED");
+
                 Util.log("SCHEDULING_GAME", player1Socket.getInetAddress().getHostAddress(), String.valueOf(player1Socket.getPort()), player2Socket.getInetAddress().getHostAddress(), String.valueOf(player2Socket.getPort()));
 
                 GAME_POOL.submit(new OnlineGame(player1Socket, player1, player2Socket, player2));
