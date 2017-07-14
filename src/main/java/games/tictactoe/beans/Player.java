@@ -68,14 +68,17 @@ public class Player {
         Player player = new Player(Move.X, socket.getInputStream(), socket.getOutputStream());
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        String message;
-        while ((message = player.readLine()) != null) {
-            if (message.equals("write")) {
-                player.writeLine(br.readLine());
-            } else {
-                System.out.println(message);
-                if (message.toLowerCase().contains("winner")) {
-                    break;
+        outer:
+        while (true) {
+            String message;
+            while ((message = player.readLine()) != null) {
+                if (message.equals("write")) {
+                    player.writeLine(br.readLine());
+                } else {
+                    System.out.println(message);
+                    if (message.toLowerCase().contains("winner")) {
+                        break outer;
+                    }
                 }
             }
         }
