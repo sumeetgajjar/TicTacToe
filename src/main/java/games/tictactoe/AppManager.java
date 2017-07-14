@@ -23,7 +23,7 @@ public class AppManager {
 
         switch (gameType) {
             case ARENA:
-                GameStatsService.initStatusServer();
+                GameStatsService.initStatsServer();
                 Arena arena = new Arena();
                 arena.start();
                 break;

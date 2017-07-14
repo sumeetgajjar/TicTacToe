@@ -25,7 +25,7 @@ public class GameStatsService {
     private static final Gson GSON = new GsonBuilder().serializeNulls().setPrettyPrinting().create();
 
 
-    public static void initStatusServer() throws IOException {
+    public static void initStatsServer() throws IOException {
 
         if (!Util.isSet(STATUS_SERVER_SOCKET)) {
             synchronized (GameStatsService.class) {
