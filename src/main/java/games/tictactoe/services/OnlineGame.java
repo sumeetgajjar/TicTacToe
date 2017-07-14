@@ -34,6 +34,11 @@ public class OnlineGame extends Game implements Runnable {
     }
 
     @Override
+    protected void writeToPlayer(Player player, String message) throws IOException {
+        player.write(message);
+    }
+
+    @Override
     public void run() {
         try {
             Arena.addGameStats(gameStats);

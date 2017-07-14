@@ -25,7 +25,7 @@ public abstract class Game {
     }
 
     private void initBoard() throws IOException {
-        player1.writeLine("Please Enter the Board Size");
+        writeToPlayer(player1, "Please Enter the Board Size");
         int n = Integer.parseInt(readFromPlayer(player1));
         this.board = new Board(n);
         broadCastToPlayers(String.format("The size of the board is %d", n));
@@ -37,9 +37,13 @@ public abstract class Game {
         return player.readLine();
     }
 
+    protected void writeToPlayer(Player player, String message) throws IOException {
+        player.writeLine(message);
+    }
+
     private void initializePlayer(Player player, int i) throws IOException {
         broadCastToPlayers(String.format("Initializing Player %d", i));
-        player.writeLine("Enter your Name");
+        writeToPlayer(player, "Enter your Name");
         String username = readFromPlayer(player);
         player.setUserName(username);
     }
