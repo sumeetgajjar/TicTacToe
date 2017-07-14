@@ -43,4 +43,13 @@ public class Player {
         bw.newLine();
         bw.flush();
     }
+
+    public void close() {
+        try {
+            inputStream.close();
+            outputStream.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

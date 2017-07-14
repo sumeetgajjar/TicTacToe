@@ -40,7 +40,7 @@ public abstract class Game {
         player.setUserName(username);
     }
 
-    public void play() throws IOException {
+    private void initializePlayers() throws IOException {
         gameStats.setGameState(GameState.INITIALIZING);
         initBoard();
         initializePlayer(player1, 1);
@@ -48,6 +48,10 @@ public abstract class Game {
 
         gameStats.setPlayer1(player1.getUserName());
         gameStats.setPlayer2(player2.getUserName());
+    }
+
+    public void play() throws IOException {
+        initializePlayers();
 
         Map<Move, Player> userMap = new EnumMap<>(Move.class);
         userMap.put(Move.X, player1);

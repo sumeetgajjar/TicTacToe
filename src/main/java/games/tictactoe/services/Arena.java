@@ -49,9 +49,11 @@ public class Arena {
 
         while (true) {
             try {
-                Player player1 = getPlayer(serverSocket.accept());
-                Player player2 = getPlayer(serverSocket.accept());
-                GAME_POOL.submit(new Match(player1, player2));
+                Socket player1Socket = serverSocket.accept();
+                Player player1 = getPlayer(player1Socket);
+                Socket player2Socket = serverSocket.accept();
+                Player player2 = getPlayer(player2Socket);
+                GAME_POOL.submit(new OnlineGame(player1Socket, player1, player2Socket, player2));
 
             } catch (Exception e) {
                 e.printStackTrace();
