@@ -3,6 +3,7 @@ package games.tictactoe.services;
 import games.tictactoe.beans.GameStats;
 import games.tictactoe.beans.Move;
 import games.tictactoe.beans.Player;
+import utils.Util;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -25,8 +26,10 @@ public class Arena {
     private static final ExecutorService GAME_POOL = Executors.newCachedThreadPool();
 
     public Arena() throws IOException {
+        Util.log("INITIALIZING_ARENA", String.valueOf(PORT));
         this.serverSocket = new ServerSocket(PORT);
         this.move = Move.O;
+        Util.log("ARENA_INITIALIZED");
     }
 
     public static synchronized void addGameStats(GameStats gameStats) {
