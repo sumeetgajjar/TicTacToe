@@ -55,6 +55,7 @@ public class Player {
 
     public void close() {
         try {
+            bw.flush();
             bw.close();
             br.close();
         } catch (Exception e) {
