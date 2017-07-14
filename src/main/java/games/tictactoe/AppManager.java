@@ -3,6 +3,7 @@ package games.tictactoe;
 import games.tictactoe.beans.GameType;
 import games.tictactoe.services.Arena;
 import games.tictactoe.services.Game;
+import games.tictactoe.services.GameStatsService;
 import games.tictactoe.services.LocalGame;
 
 import java.io.IOException;
@@ -24,6 +25,7 @@ public class AppManager {
             case ARENA:
                 Arena arena = new Arena();
                 arena.start();
+                GameStatsService.initStatusServer();
                 break;
             case LOCAL:
                 Game game = new LocalGame();
