@@ -1,6 +1,7 @@
 package games.tictactoe.services;
 
 import games.tictactoe.beans.*;
+import utils.Util;
 
 import java.io.IOException;
 import java.util.EnumMap;
@@ -25,18 +26,26 @@ public abstract class Game {
     }
 
     private void initBoard() throws IOException {
-        player1.writeLine("Please Enter the Board Size");
-        int n = Integer.parseInt(player1.readLine());
+        writeToPlayer(player1, "Please Enter the Board Size");
+        int n = Integer.parseInt(readFromPlayer(player1));
         this.board = new Board(n);
         broadCastToPlayers(String.format("The size of the board is %d", n));
     }
 
     protected abstract void broadCastToPlayers(String message) throws IOException;
 
+    protected String readFromPlayer(Player player) throws IOException {
+        return player.readLine();
+    }
+
+    protected void writeToPlayer(Player player, String message) throws IOException {
+        player.writeLine(message);
+    }
+
     private void initializePlayer(Player player, int i) throws IOException {
         broadCastToPlayers(String.format("Initializing Player %d", i));
-        player.writeLine("Enter your Name");
-        String username = player.readLine();
+        writeToPlayer(player, "Enter your Name");
+        String username = readFromPlayer(player);
         player.setUserName(username);
     }
 
@@ -57,6 +66,7 @@ public abstract class Game {
         userMap.put(Move.X, player1);
         userMap.put(Move.O, player2);
 
+        Util.log("STARTING_GAME", player1.getUserName(), player2.getUserName());
         gameStats.setGameState(GameState.RUNNING);
         broadCastToPlayers(board.display());
         Move mover = Move.O;
@@ -66,7 +76,7 @@ public abstract class Game {
             while (true) {
                 Player player = userMap.get(mover);
                 broadCastToPlayers(String.format("Its %s's turn to play %s: ", player.getUserName(), player.getMove().name()));
-                int nextMove = Integer.parseInt(player.readLine());
+                int nextMove = Integer.parseInt(readFromPlayer(player));
                 try {
                     board.makeMove(nextMove, mover);
                     boolean checkWinner = board.checkWinner(mover);

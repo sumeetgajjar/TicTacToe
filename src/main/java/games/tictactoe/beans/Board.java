@@ -140,9 +140,8 @@ public class Board {
                 builder.append("|");
                 index++;
             }
-            builder.append("\r\n");
+            builder.append("\n");
         }
-        builder.append("\r\n");
         String string = builder.toString();
         return string;
     }

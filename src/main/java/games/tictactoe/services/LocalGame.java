@@ -17,6 +17,6 @@ public class LocalGame extends Game {
 
     @Override
     protected void broadCastToPlayers(String message) throws IOException {
-        player1.writeLine(message);
+        writeToPlayer(player1, message);
     }
 }
