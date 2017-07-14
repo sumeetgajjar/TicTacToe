@@ -10,4 +10,12 @@ public class Util {
         return o != null;
     }
 
+    public static void log(String... messages) {
+        StringBuilder builder = new StringBuilder();
+        for (String message : messages) {
+            builder.append(message).append("|");
+        }
+        System.out.println(builder.toString());
+    }
+
 }
